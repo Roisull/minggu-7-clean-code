@@ -36,3 +36,14 @@ func (u *UserUsecase) CreateUser(user *model.User) (*model.User, error){
 
 	return createdUser, nil
 }
+
+// usecase untuk interaksi get all user with auth
+func (u *UserUsecase) GetAuthenticatedUsers() ([]model.User, error) {
+	// logika bisnis untuk mendapatkan pengguna yang memerlukan otentikasi
+	users, err := u.userRepository.GetAuthenticatedUsers()
+	if err != nil{
+		return nil, err
+	}
+	// Panggil metode dari userRepository atau repositori data
+	return users, nil
+ }

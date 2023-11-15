@@ -45,3 +45,15 @@ func (r *UserRepositoryImpl) CreateUser(user *model.User) (*model.User, error) {
 
 	return user, nil
 }
+
+// GetAuthenticatedUsers implements UserRepository.
+func (r *UserRepositoryImpl) GetAuthenticatedUsers() ([]model.User, error) {
+	// logika untuk mendapatkan pengguna yang memerlukan otentikasi
+	// menggunakan kondisi tertentu seperti status otentikasi di dalam query
+	var users []model.User
+	err := r.db.Where("token IS NOT NULL").Find(&users).Error
+	if err != nil {
+	   return nil, err
+	}
+	return users, nil
+ }
